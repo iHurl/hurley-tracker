@@ -9,23 +9,21 @@
 
       function drawChart() {
         var queryString = encodeURIComponent('SELECT A, C, D, E');
-
         var dataSourceUrl = 'https://docs.google.com/spreadsheets/d/1WMsdSVMl6S4EZ_BZ-JPoHqdSZp1Om1pSfuht65gclo0/gviz/tq?sheet=Sheet1&tq=' + queryString;
 
         var query = new google.visualization.Query(dataSourceUrl);
         query.send(function(response) {
           if (response.isError()) {
-            alert('Error: ' + response.getMessage());
+            document.body.innerHTML = 'Error: ' + response.getMessage();
             return;
           }
 
           var data = response.getDataTable();
-
           var options = {
             title: 'Hurley Hits Over Time',
             curveType: 'function',
             legend: { position: 'bottom' },
-            hAxis: { title: 'Timestamp' },
+            hAxis: { title: 'Time' },
             vAxis: { title: 'Hits' }
           };
 
@@ -36,15 +34,7 @@
     </script>
   </head>
   <body>
-    <h2>Hurley Training Hits Dashboard</h2>
+    <h2>Hurley Hit Log</h2>
     <div id="chart_div" style="width: 100%; height: 500px;"></div>
   </body>
 </html>
- 
-
-
-
-
-
-
-
